@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">MoviesConnect</string>
+    <string name="app_name">MovieConnect</string>
+    <string name="popular_movies">Popular</string>
+    <string name="toprated_movies">Top Rated</string>
+
+    <string name="error_connect">No Internet connection on your device! \n\nOR \n\nNull API KEY!</string>
+
+    <string name="movie_title">Movie Title</string>
+    <string name="vote_average">Average Votes</string>
+    <string name="date_released">Date Released</string>
+    <string name="movie_overview">Overview</string>
 </resources>

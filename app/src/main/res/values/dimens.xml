@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- My App's padding dimensions -->
+    <dimen name="myapp_padding_small">4dp</dimen>
+    <dimen name="myapp_padding_medium">8dp</dimen>
+    <dimen name="myapp_padding_large">16dp</dimen>
+
+    <!-- My App's margin dimensions -->
+    <dimen name="myapp_margin_small">4dp</dimen>
+    <dimen name="myapp_margin_medium">8dp</dimen>
+    <dimen name="myapp_margin_large">16dp</dimen>
+
+    <!-- My App's progress bar dimensions -->
+    <dimen name="myapp_progressbar_width">42dp</dimen>
+    <dimen name="myapp_progressbar_height">42dp</dimen>
+
+    <!-- My App's textSize dimensions -->
+    <dimen name="myapp_textsize_big">22sp</dimen>
+
+    <!-- My App's cardview dimensions -->
+    <dimen name="myapp_cardview_width">170dp</dimen>
+    <dimen name="myapp_cardview_height">330dp</dimen>
+    <dimen name="myapp_cardview_image_height">277dp</dimen>
+</resources>
