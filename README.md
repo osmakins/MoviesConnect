@@ -16,3 +16,6 @@ Udacity Popular Movies Project (Stage 1)
 * RecyclerViews, ViewHolders and Adapters
 * Intents (Implicit and Explicit)
 * Third-Party Android Libraries (Glide, a library to load images to your app)
+
+![details layout](MoviesConnect/app/src/detailslayout.png "details layout")
+![Gridview layout](MoviesConnect/app/src/gridlayout.png "Gridview layout")
