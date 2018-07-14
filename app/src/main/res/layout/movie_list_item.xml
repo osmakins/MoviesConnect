@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- For each item received make cardview -->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/myapp_cardview_width"
+    android:layout_height="@dimen/myapp_cardview_height"
+    android:layout_marginBottom="@dimen/myapp_margin_medium"
+    android:foreground="?android:attr/selectableItemBackground"
+    cardview:cardCornerRadius="@dimen/cardview_default_radius">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/movie_poster"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/myapp_cardview_image_height"
+            android:background="@color/myapp_image_background"
+            android:padding="@dimen/myapp_padding_medium"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Movie Title"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

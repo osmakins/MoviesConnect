@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieConnect</string>
+    <string name="app_name">MoviesConnect</string>
     <string name="popular_movies">Popular</string>
     <string name="toprated_movies">Top Rated</string>
 

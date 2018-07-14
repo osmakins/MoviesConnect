@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/popular_movies"
+        android:id="@+id/sort_popular"
+        android:orderInCategory="1"/>
+
+    <item android:title="@string/toprated_movies"
+        android:id="@+id/sort_toprated"
+        android:orderInCategory="2"/>
+</menu>
