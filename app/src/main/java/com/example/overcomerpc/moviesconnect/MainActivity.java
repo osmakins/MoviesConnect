@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,15 +22,18 @@ import com.example.overcomerpc.moviesconnect.utils.NetworkUtils;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler{
 
     private MoviesAdapter mMoviesAdapter;
-    List<Movies> mMoviesList;
+    private List<Movies> mMoviesList;
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     // The main activity views
     @BindView(R.id.movies_recyclerview)
@@ -49,17 +53,18 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         movieRecyclerview.setLayoutManager(layoutManager);
         movieRecyclerview.setHasFixedSize(true);
-        mMoviesList = new ArrayList<Movies>();
+        mMoviesList = new ArrayList<>();
 
         mMoviesAdapter = new MoviesAdapter(getApplicationContext(), mMoviesList);
         movieRecyclerview.setAdapter(mMoviesAdapter);
         mMoviesAdapter.setOnItemClicklistener(MainActivity.this);
 
-        new MoviesConnectTask(this).execute(Constants.SORT_POPULAR);
+        new MoviesConnectTask(this).execute(ClickItem(0));
     }
 
     // Method for handling the setting's sort choice
-    public String ClickItem(int item, String sorting){
+    private String ClickItem(int item){
+        String sorting;
         switch (item){
             case R.id.sort_popular:
                 sorting = Constants.SORT_POPULAR;
@@ -103,15 +108,15 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         startActivity(detailsIntent);
     }
 
-    // Fetch data from the internet on the background thread using asynctask
-    public static class MoviesConnectTask extends AsyncTask<String, Void, Movies[]> {
+    // Fetch data from the internet on the background thread using AsyncTask
+    private static class MoviesConnectTask extends AsyncTask<String, Void, Movies[]> {
 
         // Note to self.
         // How to use a static inner AsyncTask class:
         // https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
         // Use volley or retrofit for stage 2.
 
-        private WeakReference<MainActivity> activityReference;
+        private final WeakReference<MainActivity> activityReference;
 
         MoviesConnectTask(MainActivity context){
             activityReference = new WeakReference<>(context);
@@ -134,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
             URL moviesRequestUrl = NetworkUtils.buildUrl(sortOrder);
             try {
                 String jsonMovieResponse = NetworkUtils.getResponseFromHttpUrl(moviesRequestUrl);
-                Movies[] simpleMoviesData = JsonUtils.getMoviesDataFromJson(jsonMovieResponse);
-                return simpleMoviesData;
+                Log.v(LOG_TAG, jsonMovieResponse.toString());
+                return JsonUtils.getMoviesDataFromJson(jsonMovieResponse);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -150,12 +155,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
             activity.mProgressBar.setVisibility(View.INVISIBLE);
             if(moviesData != null){
                 activity.mMoviesAdapter.clearRecyclerViewData();
-                for(Movies movieObj : moviesData){
-                    activity.mMoviesList.add(movieObj);
-                }
+                Collections.addAll(activity.mMoviesList, moviesData);
                 activity.showJMoviesResults();
                 activity.mMoviesAdapter.notifyItemRangeInserted(0,moviesData.length);
-
             }else {
                 activity.showErrorMessage();
             }
@@ -172,10 +174,8 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String sorted = null;
         int itemThatWasClickedId = item.getItemId();
-        String sortOrder = ClickItem(itemThatWasClickedId, sorted);
-
+        String sortOrder = ClickItem(itemThatWasClickedId);
         new MoviesConnectTask(this).execute(sortOrder);
         return super.onOptionsItemSelected(item);
     }
