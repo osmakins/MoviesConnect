@@ -80,16 +80,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if(mClickHandler != null){
-                        int position = getAdapterPosition();
-                        if(position != RecyclerView.NO_POSITION){
-                            mClickHandler.onItemClicked(position);
-                        }
+                if(mClickHandler != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        mClickHandler.onItemClicked(position);
                     }
+                }
                 }
             });
         }
-
     }
 
     @Override

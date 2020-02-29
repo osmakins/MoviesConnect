@@ -31,24 +31,21 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.MoviesAdapterOnClickHandler{
 
-    private MoviesAdapter mMoviesAdapter;
-    private List<Movies> mMoviesList;
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
+    private MoviesAdapter mMoviesAdapter;
+    private List<Movies> mMoviesList;
+
     // The main activity views
-    @BindView(R.id.movies_recyclerview)
-    RecyclerView movieRecyclerview;
-    @BindView(R.id.pb_loading)
-    ProgressBar mProgressBar;
-    @BindView(R.id.tv_error_message_display)
-    TextView mErrorMessage;
+    @BindView(R.id.movies_recyclerview) RecyclerView movieRecyclerview;
+    @BindView(R.id.pb_loading) ProgressBar mProgressBar;
+    @BindView(R.id.tv_error_message_display) TextView mErrorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         movieRecyclerview.setLayoutManager(layoutManager);
@@ -60,6 +57,17 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
         mMoviesAdapter.setOnItemClicklistener(MainActivity.this);
 
         new MoviesConnectTask(this).execute(ClickItem(0));
+    }
+    private void showJMoviesResults(){
+        //make error message invisible, then make the json results visible.
+        mErrorMessage.setVisibility(View.INVISIBLE);
+        movieRecyclerview.setVisibility(View.VISIBLE);
+    }
+
+    private void showErrorMessage(){
+        // Show json results and hide the error message.
+        movieRecyclerview.setVisibility(View.INVISIBLE);
+        mErrorMessage.setVisibility(View.VISIBLE);
     }
 
     // Method for handling the setting's sort choice
@@ -77,18 +85,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
                 break;
         }
         return sorting;
-    }
-
-    private void showJMoviesResults(){
-        //make error message invisible, then make the json results visible.
-        mErrorMessage.setVisibility(View.INVISIBLE);
-        movieRecyclerview.setVisibility(View.VISIBLE);
-    }
-
-    private void showErrorMessage(){
-        // Show json results and hide the error message.
-        movieRecyclerview.setVisibility(View.INVISIBLE);
-        mErrorMessage.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -109,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
     }
 
     // Fetch data from the internet on the background thread using AsyncTask
-    private static class MoviesConnectTask extends AsyncTask<String, Void, Movies[]> {
+    public class MoviesConnectTask extends AsyncTask<String, Void, Movies[]> {
 
         // Note to self.
         // How to use a static inner AsyncTask class:
@@ -163,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
             }
         }
     }
-
     // Settings menu options and item selection
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

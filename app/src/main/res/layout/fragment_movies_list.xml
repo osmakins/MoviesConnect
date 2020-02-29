@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/myapp_padding_medium"
+    tools:context=".MainActivity">
+
+    <!-- RecyclerView to display json result from the internet data-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movies_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"/>
+
+    <!-- Handle error connection or null API KEY -->
+    <TextView
+        android:id="@+id/tv_error_message_display"
+        android:textSize="@dimen/myapp_textsize_big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/myapp_padding_large"
+        android:layout_gravity="center"
+        android:text="@string/error_connect"
+        android:visibility="invisible"/>
+
+    <!-- Display when data is loading... -->
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="@dimen/myapp_progressbar_width"
+        android:layout_height="@dimen/myapp_progressbar_height"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
+</FrameLayout>
