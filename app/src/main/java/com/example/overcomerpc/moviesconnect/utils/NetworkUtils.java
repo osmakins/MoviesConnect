@@ -20,16 +20,12 @@ public class NetworkUtils {
     public static URL buildUrl(String sortBy){
         Uri builtUri = null;
         switch(sortBy){
-            case Constants.SORT_POPULAR:
-                builtUri = Uri.parse(Constants.POPULAR_MOVIES_BASE_URL).buildUpon()
-                        .appendQueryParameter(Constants.API_KEY, Constants.API_KEY_PARAM)
-                        .build();
-                break;
             case Constants.SORT_TOPRATED:
                 builtUri = Uri.parse(Constants.TOP_RATED_MOVIES_BASE_URL).buildUpon()
                         .appendQueryParameter(Constants.API_KEY, Constants.API_KEY_PARAM)
                         .build();
                 break;
+            case Constants.SORT_POPULAR:
             default:
                 builtUri = Uri.parse(Constants.POPULAR_MOVIES_BASE_URL).buildUpon()
                         .appendQueryParameter(Constants.API_KEY, Constants.API_KEY_PARAM)

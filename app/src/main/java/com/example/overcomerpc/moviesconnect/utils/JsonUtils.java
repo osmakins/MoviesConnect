@@ -23,7 +23,6 @@ public class JsonUtils {
                 case HttpURLConnection.HTTP_OK:
                     break;
                 case HttpURLConnection.HTTP_NOT_FOUND:
-                    return null;
                 default:
                     return null;
             }
